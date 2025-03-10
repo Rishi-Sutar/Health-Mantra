@@ -1,0 +1,6 @@
+setup.py
+calories_tracker.egg-info/PKG-INFO
+calories_tracker.egg-info/SOURCES.txt
+calories_tracker.egg-info/dependency_links.txt
+calories_tracker.egg-info/requires.txt
+calories_tracker.egg-info/top_level.txt

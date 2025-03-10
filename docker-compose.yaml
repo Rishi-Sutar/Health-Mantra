@@ -1,0 +1,20 @@
+services:
+  django:
+    build: ./webapp
+    ports:
+      - "8000:8000"
+    depends_on:
+      - fastapi
+    volumes:
+      - ./webapp:/app
+    environment:
+      - DEBUG=1
+
+  fastapi:
+    build: ./calories-tracker/app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./calories-tracker/app:/app
+    environment:
+      - DEBUG=1

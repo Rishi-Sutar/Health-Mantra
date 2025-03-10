@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/36a980a7009b4036b574725b6430a648/artifacts
+end_time: 1741506097822
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 36a980a7009b4036b574725b6430a648
+run_name: fearless-fawn-283
+run_uuid: 36a980a7009b4036b574725b6430a648
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741506072702
+status: 4
+tags: []
+user_id: Richie

@@ -1,0 +1,13 @@
+Metadata-Version: 2.2
+Name: calories_tracker
+Version: 0.0.0
+Author: Richie
+Author-email: rishisutar183@gmail.com
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: seaborn
+Requires-Dist: scikit-learn
+Dynamic: author
+Dynamic: author-email
+Dynamic: requires-dist

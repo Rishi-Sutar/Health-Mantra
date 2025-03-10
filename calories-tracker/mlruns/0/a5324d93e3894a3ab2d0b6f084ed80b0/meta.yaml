@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/a5324d93e3894a3ab2d0b6f084ed80b0/artifacts
+end_time: 1741505421675
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a5324d93e3894a3ab2d0b6f084ed80b0
+run_name: capricious-cod-416
+run_uuid: a5324d93e3894a3ab2d0b6f084ed80b0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741505390179
+status: 4
+tags: []
+user_id: Richie

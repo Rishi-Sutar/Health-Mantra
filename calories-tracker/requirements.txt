@@ -1,0 +1,14 @@
+pandas
+numpy 
+matplotlib 
+seaborn
+scikit-learn
+zenml
+mlflow
+dvc
+dvc[gdrive]
+pymongo
+pymongo[srv]==3.6
+dnspython
+django-allauth
+# -e .
