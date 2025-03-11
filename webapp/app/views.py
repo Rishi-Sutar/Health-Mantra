@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .forms import PredictionForm
 import requests
 from app.db import db
+import os 
 
 def home(request):
     context = {}
