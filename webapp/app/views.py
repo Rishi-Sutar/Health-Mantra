@@ -20,7 +20,7 @@ def predict(request):
         form = PredictionForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            response = requests.post('https://fastapi-service-mwc5.onrender.com/predict/', json=data)
+            response = requests.post(os.getenv(api-url), json=data)
             if response.status_code == 200:
                 prediction = response.json()['Calories']
                 # Save the input data and prediction to MongoDB

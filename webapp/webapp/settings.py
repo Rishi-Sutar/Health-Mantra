@@ -100,7 +100,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'calories-tracker',
         'CLIENT': {
-            'host': 'mongodb+srv://rishisutar:RishikeshSutar@calories-tracker.nb2cx.mongodb.net/?retryWrites=true&w=majority&appName=calories-tracker'
+            'host': os.getenv(MONGO_DB_URI),
         }
     }
 }
