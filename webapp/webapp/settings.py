@@ -100,7 +100,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'calories-tracker',
         'CLIENT': {
-            'host': os.getenv(MONGO_DB_URI),
+            'host': os.getenv('MONGO_DB_URI'),
         }
     }
 }
