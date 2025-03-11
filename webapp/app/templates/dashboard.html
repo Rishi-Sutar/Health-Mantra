@@ -1,0 +1,138 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            width: 100%;
+            max-width: 50%; 
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Health-Mantra</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
+                    
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="/predict/">Calorie Predictor</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/history/">Prediction History</a></li>
+                        <a class="btn btn-danger" href="{% url 'account_logout' %}">Logout</a>
+                    {% else %}
+                        <a class="btn btn-warning" href="{% url 'account_login' %}">Login</a>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Charts Section -->
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Gender Chart & Age vs Calories Chart Side by Side -->
+            <div class="col-12 text-center">
+                <div class="chart-container">
+                    <canvas id="genderChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Duration vs Calories Chart (Full Width) -->
+        <div class="row mt-4">
+            <div class="col-md-6 text-center">
+                <div class="chart-container">
+                    <canvas id="ageCaloriesChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6 text-center">
+                <div class="chart-container">
+                    <canvas id="durationCaloriesChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch('/api/chart-data/')
+        .then(response => response.json())
+        .then(data => {
+            // Gender Distribution Chart
+            new Chart(document.getElementById('genderChart').getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: data.gender_distribution.labels,
+                    datasets: [{
+                        data: data.gender_distribution.values,
+                        backgroundColor: ['blue', 'pink']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'top' }
+                    }
+                }
+            });
+
+            // Age vs. Calories Chart
+            new Chart(document.getElementById('ageCaloriesChart').getContext('2d'), {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Age vs. Calories Burned',
+                        data: data.ages.map((age, index) => ({ x: age, y: data.calories[index] })),
+                        backgroundColor: 'red'
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { title: { display: true, text: 'Age' } },
+                        y: { title: { display: true, text: 'Calories' } }
+                    }
+                }
+            });
+
+            // Duration vs. Calories Chart
+            new Chart(document.getElementById('durationCaloriesChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: data.durations,
+                    datasets: [{
+                        label: 'Duration vs. Calories Burned',
+                        data: data.calories,
+                        backgroundColor: 'green'
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { title: { display: true, text: 'Duration (min)' } },
+                        y: { title: { display: true, text: 'Calories Burned' } }
+                    }
+                }
+            });
+        });
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
