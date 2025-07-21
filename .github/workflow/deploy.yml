@@ -1,0 +1,30 @@
+name: Deploy to Render
+
+on:
+  push:
+    branches: [ main ]  
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Install Render CLI
+      run: |
+        curl -fsSL https://cli.render.com/install.sh | bash
+        echo "$HOME/.render" >> $GITHUB_PATH
+
+    - name: Deploy Django to Render
+      run: |
+        render deploy-service \
+          --service-id ${{ secrets.DJANGO_SERVICE_ID }} \
+          --api-key ${{ secrets.RENDER_API_KEY }}
+
+    - name: Deploy FastAPI to Render
+      run: |
+        render deploy-service \
+          --service-id ${{ secrets.FASTAPI_SERVICE_ID }} \
+          --api-key ${{ secrets.RENDER_API_KEY }}
