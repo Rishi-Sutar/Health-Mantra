@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "health-mantra.onrender.com",
-    "127.0.0.1"
+    "127.0.0.1",
+    "https://health-mantra-api.onrender.com"
     ]
 
 
